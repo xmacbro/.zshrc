@@ -1,10 +1,20 @@
+# ---------------------------------------
+# 2025 Dropbox zshrc Config
+# Authors: Zach Johnson & Brent MacLaren
+# ---------------------------------------
+
+if command -v pyenv 1>/dev/null 2>&1; then
+        eval "$(pyenv init --path)"
+fi
+
 # Path Variable
-export PATH="$PATH:"
-export ZSH=$HOME/.oh-my-zsh
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$PATH:/root/.local/bin"
+export PATH="$PATH:/opt"
 export TERM='xterm-256color'
 export WORKON_HOME=$HOME/.py-envs
-
-export PATH="$PATH:/opt"
+export ZSH="/root/.oh-my-zsh"
 #export PATH="$PATH:/usr/local/go/bin"
 
 # Oh My ZSH Theme
@@ -27,6 +37,7 @@ alias show_all_colors='for code in {000..255};do print -P -- "$code: %F{$code}Th
 
 alias msfc="systemctl start postgresql;msfdb start;msfconsole $@"
 alias os-update="apt update && apt upgrade -y && apt autoremove -y && apt autoclean -y"
+alias nxc="unbuffer nxc $@"
 
 [[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
 [[ -s "/usr/local/bin/virtualenvwrapper.sh" ]] && mkdir -p $WORKON_HOME && source /usr/local/bin/virtualenvwrapper.sh
@@ -34,7 +45,7 @@ alias os-update="apt update && apt upgrade -y && apt autoremove -y && apt autocl
 # Plugins
 source /etc/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Syntax highlighting customization
+# Syntax highlighting customization. Looks like default Kali. Can be customized.
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[default]=none
 ZSH_HIGHLIGHT_STYLES[unknown-token]=underline
@@ -77,6 +88,3 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-3]=fg=magenta,bold
 ZSH_HIGHLIGHT_STYLES[bracket-level-4]=fg=yellow,bold
 ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=cyan,bold
 ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
-
-# Created by `pipx` on 2025-02-20 02:42:29
-export PATH="$PATH:/root/.local/bin"
